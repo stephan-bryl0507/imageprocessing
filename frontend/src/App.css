@@ -1,0 +1,346 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap");
+
+:root {
+  color-scheme: dark;
+  --bg: #0d0221;
+  --panel: #1a1040;
+  --panel-dark: #120a30;
+  --ink: #f4f1ff;
+  --muted: #a99be0;
+  --cyan: #00f5d4;
+  --pink: #ff3cac;
+  --yellow: #ffe600;
+  --green: #39ff14;
+  --pixel: "Press Start 2P", "Courier New", monospace;
+  --body: "VT323", "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--body);
+  font-size: 22px;
+  line-height: 1.3;
+  color: var(--ink);
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(0, 245, 212, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 212, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* CRT scanline overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.18) 3px
+  );
+}
+
+/* Override the Vite template's #root frame from index.css */
+#root {
+  width: 100%;
+  max-width: none;
+  border-inline: 0;
+  text-align: left;
+}
+
+.container {
+  width: min(900px, calc(100% - 32px));
+  margin: 40px auto;
+  padding: 28px;
+  background: var(--panel);
+  border: 4px solid var(--cyan);
+  box-shadow: 8px 8px 0 var(--pink), 0 0 30px rgba(0, 245, 212, 0.25);
+}
+
+.badge {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 6px 10px;
+  font-family: var(--pixel);
+  font-size: 10px;
+  color: var(--bg);
+  background: var(--yellow);
+  animation: blink 1.2s steps(2, start) infinite;
+}
+
+h1 {
+  margin: 0 0 14px;
+  font-family: var(--pixel);
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--yellow);
+  text-shadow: 3px 3px 0 var(--pink), 6px 6px 0 rgba(0, 0, 0, 0.5);
+}
+
+.subtitle {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 24px;
+}
+
+.subtitle::after {
+  content: "█";
+  margin-left: 6px;
+  color: var(--green);
+  animation: blink 1s steps(2, start) infinite;
+}
+
+label {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+  font-family: var(--pixel);
+  font-size: 10px;
+  line-height: 1.6;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 20px;
+  margin: 8px 0 4px;
+  padding: 8px 18px 4px;
+  background: var(--panel-dark);
+  border: 3px solid var(--pink);
+}
+
+input,
+select,
+button {
+  width: 100%;
+  padding: 12px;
+  font: inherit;
+}
+
+input,
+select {
+  font-family: var(--body);
+  font-size: 24px;
+  color: var(--ink);
+  background: var(--bg);
+  border: 3px solid var(--cyan);
+  border-radius: 0;
+}
+
+input:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  outline: 3px dashed var(--yellow);
+  outline-offset: 3px;
+}
+
+input[type="file"] {
+  cursor: pointer;
+  color: var(--muted);
+}
+
+input[type="file"]::file-selector-button {
+  margin-right: 14px;
+  padding: 10px 14px;
+  font-family: var(--pixel);
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--cyan);
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+/* Pixel-style range slider */
+input[type="range"] {
+  padding: 0;
+  height: 28px;
+  background: transparent;
+  border: 0;
+  accent-color: var(--pink);
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 10px;
+  background: var(--bg);
+  border: 3px solid var(--cyan);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 26px;
+  margin-top: -11px;
+  background: var(--pink);
+  border: 3px solid var(--ink);
+  border-radius: 0;
+}
+
+input[type="range"]::-moz-range-track {
+  height: 10px;
+  background: var(--bg);
+  border: 3px solid var(--cyan);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 22px;
+  background: var(--pink);
+  border: 3px solid var(--ink);
+  border-radius: 0;
+}
+
+button {
+  margin-top: 16px;
+  padding: 16px 12px;
+  font-family: var(--pixel);
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--yellow);
+  border: 4px solid var(--bg);
+  border-radius: 0;
+  box-shadow: 0 6px 0 #b39e00, 0 0 0 3px var(--yellow);
+  cursor: pointer;
+  transition: transform 0.05s steps(2), box-shadow 0.05s steps(2);
+}
+
+button:hover:not(:disabled) {
+  background: #fff35c;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(6px);
+  box-shadow: 0 0 0 #b39e00, 0 0 0 3px var(--yellow);
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  animation: blink 1s steps(2, start) infinite;
+}
+
+.download-button {
+  background: var(--green);
+  box-shadow: 0 6px 0 #1f9c0a, 0 0 0 3px var(--green);
+}
+
+.download-button:hover:not(:disabled) {
+  background: #7dff5c;
+}
+
+.download-button:active:not(:disabled) {
+  box-shadow: 0 0 0 #1f9c0a, 0 0 0 3px var(--green);
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.image-grid:empty {
+  display: none;
+}
+
+.image-card {
+  min-width: 0;
+  padding: 16px;
+  background: var(--panel-dark);
+  border: 3px solid var(--yellow);
+  box-shadow: 5px 5px 0 var(--cyan);
+  text-align: center;
+}
+
+.image-card h2 {
+  margin: 0 0 14px;
+  font-family: var(--pixel);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--pink);
+}
+
+/* Checkerboard behind images so transparent PNGs are visible */
+.image-card img {
+  display: block;
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  background-color: #241852;
+  background-image:
+    linear-gradient(45deg, #2f2068 25%, transparent 25%, transparent 75%, #2f2068 75%),
+    linear-gradient(45deg, #2f2068 25%, transparent 25%, transparent 75%, #2f2068 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 8px 8px;
+  border: 3px solid var(--cyan);
+}
+
+.image-card p {
+  margin-top: 10px;
+  overflow-wrap: anywhere;
+  color: var(--ink);
+}
+
+.status {
+  margin: 20px 0 0;
+  min-height: 1.3em;
+  padding: 10px 14px;
+  color: var(--green);
+  background: #000;
+  border: 3px solid var(--green);
+  overflow-wrap: anywhere;
+}
+
+.status::before {
+  content: "> ";
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin: 16px auto;
+    padding: 18px;
+    box-shadow: 5px 5px 0 var(--pink);
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  .controls,
+  .image-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge,
+  .subtitle::after,
+  button:disabled {
+    animation: none;
+  }
+}
